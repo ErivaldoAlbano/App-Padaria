@@ -1,0 +1,45 @@
+name: meu_app_padaria
+description: "A new Flutter project."
+
+publish_to: "none" 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.13.1  
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icon.png
+    - assets/mapa.png 
+    - assets/compras.png
+    - assets/pedido.png
+    - assets/inicio.jpeg
+    - assets/pao.png
+    - assets/images/padaria1.jpg
+    - assets/images/padaria2.jpeg
+    - assets/images/padaria3.jpg 
+    - assets/images/padaria4.jpg 
+    - assets/images/produtos/pao_frances.jpg
+    - assets/images/produtos/croissant_queijo.jpg
+    - assets/images/produtos/croissant_chocolate.jpg
+    - assets/images/produtos/bolo_chocolate.jpg
+    - assets/images/produtos/pastel_nata.jpg

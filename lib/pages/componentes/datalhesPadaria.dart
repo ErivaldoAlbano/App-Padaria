@@ -111,7 +111,6 @@ class DetalhesPadaria extends StatelessWidget {
 
                 return ExpansionTile(
                   title: Text(categoria),
-                  // leading: const Icon(Icons.shopping_basket_outlined),
                   children: produtos.map((produto) {
                     return Card(
                       margin: const EdgeInsets.symmetric(

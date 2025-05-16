@@ -3,6 +3,7 @@ import 'pages/inicio.dart';
 import 'pages/mapa.dart';
 import 'pages/pedido.dart';
 import 'pages/compras.dart';
+import 'pages/componentes/datalhesPadaria.dart';
 
 void main() {
   runApp(const MeuApp());
@@ -16,6 +17,10 @@ class MeuApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
+      routes: {
+        '/compras': (context) => const Compras(),
+        '/datalhesPadaria': (context) => const DetalhesPadaria(),
+      },
     );
   }
 }
@@ -46,9 +51,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(''),
-      ), // Se quiser, adicione título dinâmico aqui
+      appBar: AppBar(title: const Text('')),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,

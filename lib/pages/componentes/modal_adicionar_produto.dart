@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../models/carrinho_model.dart';
 
 class ModalAdicionarProduto extends StatefulWidget {
   final Map<String, dynamic> produto;
@@ -73,7 +75,6 @@ class _ModalAdicionarProdutoState extends State<ModalAdicionarProduto> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -178,8 +179,66 @@ class _ModalAdicionarProdutoState extends State<ModalAdicionarProduto> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        // Loader de carregamento
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (_) => const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+
+                        await Future.delayed(const Duration(seconds: 2));
+
+                        Navigator.pop(context); // fecha loader
+
+                        // Adicionando o produto ao carrinho via Provider
+                        final carrinho = Provider.of<CarrinhoModel>(context, listen: false);
+                        carrinho.adicionarProduto(widget.produto, quantidade);
+
+                        // Mostra confirmação
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: fundoBege,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              title: const Text(
+                                'Adicionado',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: marromEscuro,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              content: const Text(
+                                'O produto foi adicionado ao carrinho com sucesso.',
+                                style: TextStyle(color: marromEscuro),
+                                textAlign: TextAlign.center,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // fecha o Alert
+                                    Navigator.pop(context); // fecha o modal
+                                    Navigator.pushNamed(context, '/compras'); // navega para compras
+                                  },
+                                  child: const Text('Finalizar'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // fecha o Alert
+                                    Navigator.pop(context); // fecha o modal
+                                  },
+                                  child: const Text('Adicionar mais produtos'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: castanhoClaro,
